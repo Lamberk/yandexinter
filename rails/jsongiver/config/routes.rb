@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'json/light'
+
   get 'json/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

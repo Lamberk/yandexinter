@@ -1,0 +1,26 @@
+[     
+      {
+        "from": "MOSCOW",
+        "to": "WARSAWA"
+      },
+      {
+        "from": "LION",
+        "to": "PARIS"
+      },
+      {
+        "from": "DELI",
+        "to": "SAMARA"
+      },
+      {
+        "from": "WARSAWA",
+        "to": "DELI"
+      },
+      {
+        "from": "PARIS",
+        "to": "NEWYORK"
+      },
+      {
+        "from": "SAMARA",
+        "to": "LION"
+      }
+]

@@ -1,0 +1,2 @@
+# yandexinter
+js

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <!-- Тег meta для указания кодировки -->
+ 
   <meta charset="utf-8">
 </head>
 
@@ -11,41 +11,90 @@
   <script>
 
 
-	var request = new XMLHttpRequest();
-	request.open('GET', 'http://localhost:3000/json/index', true);
-	request.onreadystatechange = function() {
-  		if (request.readyState == 4) {
-     		if(request.status == 200) {
-     			var response = JSON.parse(this.responseText);
-     	    	from = [],
-     	    	to = [];
+  var request = new XMLHttpRequest();
+  request.open('GET', 'http://localhost:3000/json/index', true);
+  request.onreadystatechange = function() {
+      if (request.readyState == 4) {
+        if(request.status == 200) {
+          var response = JSON.parse(this.responseText);
+          var from = [];
+          var to = [];
 
-     			response.forEach(function(item, i, arr) {
-     			     			
-     				if (to.indexOf(item.from)==-1) {
-     					from[from.length] = item.from;
-      				} else {
-     					to.splice(to.indexOf(item.from),1);
-     				};
-     				
-     				if (from.indexOf(item.to)==-1) {
-     					to[to.length] = item.to;
-     					
-     				} else {
-     					from.splice(from.indexOf(item.to),1);
-     				};
+          var memory = [[]];
+          var temper;
 
-     			}); 
+          response.forEach(function(each) {
 
-     			console.log(from);
-     			console.log(to);
-     		};
-  		};
-	};
+            temper = temper + ' ' + each.from + ' ' + each.to;
+            console.log(temper);
+
+          });
+
+          var len;
 
 
-	request.send(null);
+          memory[0] = [response.from, response.to];
+            response.forEach (function(singleJson) {           
+              memory.forEach(function loop(singleStack, i, stack) { 
 
-  	</script>
+                if (singleJson.to == singleStack[0]) {                  
+                  singleStack.unshift(singleJson.from);
+                  return;
+
+                } else
+                if (singleJson.from == singleStack[singleStack.length]) {
+                  singleStack.push(singleJson.to);
+                  return;
+                } else {
+                    var tmp = [singleJson.from, singleJson.to];
+                    stack.push(tmp);
+                    return;
+                }
+              }); 
+            });
+            console.log(memory[0]);
+            console.log(memory[1]);
+            console.log(memory[2]);
+            console.log(memory[3]);
+            console.log(memory[4]);
+            console.log(memory[5]);
+            console.log(memory[6]);
+            console.log(memory[7]);
+            console.log(memory[8]);
+
+
+
+/*
+
+          response.forEach(function(item, i, arr) {
+
+
+                    
+            if (to.indexOf(item.from)==-1) {
+              from[from.length] = item.from;
+              } else {
+              to.splice(to.indexOf(item.from),1);
+            };
+            
+            if (from.indexOf(item.to)==-1) {
+              to[to.length] = item.to;
+              
+            } else {
+              from.splice(from.indexOf(item.to),1);
+            };
+
+          }); 
+
+          console.log(from);
+          console.log(to);
+*/
+           };
+      };
+  };
+
+
+  request.send(null);
+
+    </script>
 </body>
 </html>
